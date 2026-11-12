@@ -1,0 +1,57 @@
+# macOS
+.DS_Store
+._*
+
+# Editors and local tool settings
+.vscode/
+.idea/
+*.swp
+*~
+.claude/settings.local.json
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+
+# ROS 2 / colcon workspace output
+build/
+/install/
+/log/
+# Ad hoc recordings with the default name; test scenarios are versioned
+rosbag2_*/
+
+# C++ (CMake, clangd, coverage)
+cmake-build-*/
+CMakeUserPresets.json
+compile_commands.json
+.cache/
+*.gcda
+*.gcno
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+htmlcov/
+
+# Node (console)
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+test-results/
+playwright-report/
+blob-report/
+
+# MkDocs build output
+/site/
+
+# Logs (kept under docs/, where they may be versioned evidence)
+*.log
+!docs/**/*.log
