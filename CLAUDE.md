@@ -26,7 +26,7 @@ used clinically [§1.2, ES-001].
   Commit messages use the same format [repository convention] and carry a
   `Co-Authored-By` trailer when AI was used [§9.5].
 - Every change goes through a pull request that states how AI was used [§9.5]
-  and ends with `Closes #<issue>` [repository convention].
+  and contains `Closes #<issue>` [repository convention].
 - Never merge a pull request (no `gh pr merge`). The maintainer reviews it and
   squash-merges it [§9.3, §9.5].
 - No irreversible action (release, tag, deletion) without the maintainer's
