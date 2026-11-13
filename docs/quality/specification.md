@@ -342,7 +342,7 @@ Chaque exigence de sécurité (ES-xxx) est une mesure qui maîtrise un risque de
 
 Tout tourne dans un conteneur Docker. Le navigateur ne parle au robot qu'à travers rosbridge, et chaque consigne passe par le nœud RCM, qui applique la zone de sécurité avant d'envoyer quoi que ce soit au bras.
 
-&#91;embedded content: architecture V1 · 7 composants dans un conteneur Docker\]
+![architecture V1 · 7 composants dans un conteneur Docker](images/architecture-v1.png)
 
 La console envoie des touches ; la téléopération en fait une consigne RCM ; seul le nœud RCM commande le bras simulé, à travers un contrôleur standard de ros2\_control. MoveIt n'intervient qu'au démarrage, pour placer l'instrument dans le trocart ; le controller manager bascule ensuite d'un contrôleur à l'autre (EF-106).
 
@@ -680,7 +680,7 @@ Le registre est revu :
 
 À raison de 1 à 2 h par jour (environ 10 h par semaine), la V1 demande 26 à 35 semaines de travail, soit environ 30 à 40 semaines avec la marge, et une publication entre juin et août 2027 si le travail commence en novembre 2026.
 
-&#91;embedded content: feuille de route V1 · 7 jalons\]
+![feuille de route V1 · 7 jalons](images/roadmap-v1.png)
 
 Chaque jalon se termine par une démo et un tutoriel : même si le projet s'arrête en cours de route, ce qui est fait reste montrable (RJ-006). Le RCM, la partie la plus risquée, est réparti sur deux jalons : le J3 pour les calculs en C++ (après un prototype Python), le J4 pour le nœud ROS 2 et la sécurité de démarrage (RJ-002).
 
