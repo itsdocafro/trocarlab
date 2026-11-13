@@ -26,4 +26,4 @@ The brief in section 5.6 of the [specification](../quality/specification.md) ask
 
 ## Specification diagrams
 
-The two diagrams from the specification (sections 8 and 11) will be added in a separate step.
+The two diagrams from the specification (sections 8 and 11) are in [../quality/images/](../quality/images/).
