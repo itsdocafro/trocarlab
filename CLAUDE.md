@@ -25,6 +25,9 @@ used clinically [§1.2, ES-001].
 - Pull request titles use Conventional Commits (`feat(rcm): ...`) [§9.3].
   Commit messages use the same format [repository convention] and carry a
   `Co-Authored-By` trailer when AI was used [§9.5].
+- Never bypass the pre-commit hooks (no `--no-verify`, no `SKIP=`). If a hook
+  fails, fix the cause or ask the maintainer [ENF-011, §9.3, repository
+  convention].
 - Every change goes through a pull request that states how AI was used [§9.5]
   and contains `Closes #<issue>` [repository convention].
 - Never merge a pull request (no `gh pr merge`). The maintainer reviews it and
