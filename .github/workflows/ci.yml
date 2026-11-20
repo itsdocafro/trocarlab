@@ -1,0 +1,62 @@
+# Minimal CI for milestone J1 (specification §9.3, ENF-011).
+# `ci-ok` is the only required status check in the `main` ruleset: it waits
+# for every other job, so jobs can be added or renamed without editing the
+# ruleset. Build, tests and Docker jobs are added when they exist.
+# Actions are pinned to a full commit SHA; the version is in the comment.
+
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  pr-title:
+    # With squash merging, the pull request title becomes the commit in main.
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    permissions:
+      pull-requests: read
+    steps:
+      - name: Check that the title follows Conventional Commits
+        uses: amannn/action-semantic-pull-request@2252a14e810aa9b85c2d560bd7070c802206ecf6 # v6.1.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  pre-commit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Install pre-commit
+        run: python -m pip install pre-commit==4.7.0
+      - name: Run pre-commit on all files
+        run: pre-commit run --all-files --show-diff-on-failure
+
+  ci-ok:
+    # Runs even when a needed job fails, so the required check always reports.
+    # A skipped job (pr-title on push) does not fail it.
+    if: always()
+    needs: [pr-title, pre-commit]
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Fail if a job failed or was cancelled
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "Job results: $RESULTS"
+          for result in $RESULTS; do
+            if [ "$result" = failure ] || [ "$result" = cancelled ]; then
+              exit 1
+            fi
+          done
