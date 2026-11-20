@@ -1,0 +1,21 @@
+# pre-commit: https://pre-commit.com
+# General checks only. Language formatters (ruff, clang-format, clang-tidy,
+# prettier) are added with the first file of their language (ENF-011).
+# Update hook versions with `pre-commit autoupdate`.
+
+# LICENSE must stay identical to the official Apache 2.0 text.
+exclude: ^LICENSE$
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: detect-private-key
